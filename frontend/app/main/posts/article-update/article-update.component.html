@@ -1,0 +1,26 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{title}}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="articleModal.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-lg-8 col-md-8 col-sm-8">
+      <textarea type="text" class="form-control" [(ngModel)]="text" rows="6" cols="40" placeholder="say something..."></textarea>
+    </div>
+    <div class="col-sm-1 col-md-1 col-lg-1">
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3">
+      <div class="row" style="margin-top: 5px">
+        <button class="btn btn-success" (click)="actionSubmit()">submit</button>
+      </div>
+      <div class="row" style="margin-top: 5px">
+        <button class="btn btn-danger" (click)="reset()">reset</button>
+      </div>
+      <div class="row" style="margin-top: 5px">
+        <button class="btn btn-warning" (click)="back()">back</button>
+      </div>
+    </div>
+  </div>
+</div>

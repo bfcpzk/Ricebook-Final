@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-3">
+      <div class="row">
+        <app-headline></app-headline>
+      </div>
+      <div class="row">
+        <app-following (sendNetId)="getNewNetId($event)"></app-following>
+      </div>
+    </div>
+    <div class="col-lg-9 col-md-9 col-sm-9">
+      <app-posts [getNetIdFromParent]="getNetIdFromFollowing"></app-posts>
+    </div>
+  </div>
+</div>
+

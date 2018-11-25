@@ -1,0 +1,181 @@
+<div class="container" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+  <div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6">
+      <div class="panel panel-success">
+        <div class="panel-body row">
+          <div class="col-sm-2 col-md-2 col-lg-2 panel panel-success panel-heading">
+            <strong>Basic Profile</strong>
+          </div>
+          <div class="col-sm-3 col-md-3 col-lg-3">
+            <img src="{{user.avatar}}" class="img-circle" width="75px" height="90px" alt="user head shot">
+          </div>
+          <div class="col-sm-7 col-md-7 col-lg-7">
+            <div id="description">
+              <p>1. First-year master of computer science student from Rice.</p>
+              <p>2. Programming is the most favorite thing that I have ever met.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-6 col-lg-6">
+      <div class="panel panel-danger">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-3 col-md-3 col-lg-3">
+              <img src="../../assets/owl.jpg" class="img-rounded" width="120px" height="95px"  alt="logo">
+            </div>
+            <div class="col-sm-5 col-md-5 col-lg-5" style="text-align: center">
+              <div class="row">
+                <h4>Ricebook</h4>
+              </div>
+              <div class="row">
+                <strong>Write your story in Rice!</strong>
+              </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              <img src="../../assets/lovett.jpg" class="img-rounded" width="140px" height="95px" alt="Lovett Hall">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm-3 col-md-3 col-lg-3" style="text-align: center">
+      <label for="file" class="btn btn-success">update image</label>
+      <input id="file" type="file" style="display:none;" (change)="updateAvatar($event)">
+    </div>
+    <div class="col-sm-3 col-md-3 col-lg-3" style="text-align: center">
+      <button class="btn btn-info" (click)="toMain()">main</button>
+    </div>
+    <div class="col-sm-3 col-md-3 col-lg-3" *ngIf="isThirdParty" style="text-align: center">
+      <button class="btn btn-warning" (click)="linkAccount()">link account</button>
+    </div>
+    <div class="col-sm-3 col-md-3 col-lg-3" *ngIf="!isThirdParty" style="text-align: center">
+      <button class="btn btn-warning" (click)="unlinkAccount()">unlink account</button>
+    </div>
+    <div class="col-sm-3 col-md-3 col-lg-3" style="text-align: center">
+      <div class="alert alert-danger" *ngIf="(unlink != '') && (unlink != null)">{{unlink}}</div>
+    </div>
+
+  </div>
+
+
+  <div class="row" style="margin-top: 5px;">
+    <div class="col-sm-6 col-md-6 col-lg-6">
+      <div id="current_info_board" class="panel panel-info">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <h3>Current Info</h3>
+          </div>
+        </div>
+        <div class="panel-body" *ngIf="user">
+          <div class="alert alert-warning">
+            <span><strong>Name:</strong>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span>{{user.display_name}}</span>
+          </div>
+          <div class="alert alert-warning">
+            <span><strong>Email:</strong>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span>{{user.email}}</span>
+          </div>
+          <div class="alert alert-warning">
+            <span><strong>Phone:</strong>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span>{{user.phone}}</span>
+          </div>
+          <div class="alert alert-warning">
+            <span><strong>Zipcode:</strong>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span>{{user.zipcode}}</span>
+          </div>
+          <div class="alert alert-danger">
+            <span><strong>Date of Birth:</strong>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span>{{user.dob}}</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-6 col-lg-6">
+      <form [formGroup]="updateForm" class="form-horizontal" role="form">
+        <div class="cross-validation panel panel-success" [class.cross-validation-error]="updateForm.errors && (updateForm.touched || updateForm.dirty)">
+          <div class="panel-heading">
+            <div class="panel-title">
+              <h3>Update Info</h3>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="form-group">
+              <label for="name" class="col-sm-2 col-md-2 col-lg-2 control-lable">Name</label>
+              <div class="col-sm-10 col-md-10 col-lg-10">
+                <input type="text" class="form-control" id="name" formControlName="name">
+              </div>
+            </div>
+            <br>
+
+            <div class="form-group">
+              <label for="email" class="col-sm-2 col-md-2 col-lg-2 control-lable">Email</label>
+              <div class="col-sm-10 col-md-10 col-lg-10">
+                <input type="text" class="form-control" placeholder="xx@xx.xx" id="email" formControlName="email">
+                <div *ngIf="updateEmail.invalid && (updateEmail.dirty || updateEmail.touched)" class="alert alert-danger">
+                  <div *ngIf="updateEmail.errors.email">
+                    Email is invalid.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <div class="form-group">
+              <label for="phone" class="col-sm-2 col-md-2 col-lg-2 control-lable">Phone</label>
+              <div class="col-sm-10 col-md-10 col-lg-10">
+                <input type="text" class="form-control" placeholder="123-123-1234" id="phone" formControlName="phone">
+                <div *ngIf="updatePhone.invalid && (updatePhone.dirty || updatePhone.touched)" class="alert alert-danger">
+                  <div *ngIf="updatePhone.errors.phoneChecker">
+                    {{updatePhone.errors.phoneChecker.err}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <div class="form-group">
+              <label for="zipcode" class="col-sm-2 col-md-2 col-lg-2 control-lable">Zipcode</label>
+              <div class="col-sm-10 col-md-10 col-lg-10">
+                <input type="text" class="form-control" placeholder="77005" id="zipcode" formControlName="zipcode">
+                <div *ngIf="updateZipcode.invalid && (updateZipcode.dirty || updateZipcode.touched)" class="alert alert-danger">
+                  <div *ngIf="updateZipcode.errors.zipcodeChecker">
+                    Zipcode is invalid.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <div class="form-group">
+              <label for="password" class="col-sm-2 col-md-2 col-lg-2 control-lable">Password</label>
+              <div class="col-sm-10 col-md-10 col-lg-10">
+                <input type="password" class="form-control" placeholder="***" id="password" formControlName="password">
+                <div *ngIf="updatePassword.invalid && (updatePassword.dirty || updatePassword.touched)" class="alert alert-danger">
+                  <div *ngIf="updatePassword.errors.minlength">
+                    Password should be at least 6 characters.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <div class="col-sm-2 col-md-2 col-lg-2"></div>
+                <div class="col-sm-8 col-md-8 col-lg-8">
+                  <button class="btn btn-info" [disabled]="updateForm.invalid" (click)="onUpdate()">Update Info</button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

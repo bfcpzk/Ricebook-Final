@@ -1,0 +1,159 @@
+<form [formGroup]="registerForm" class="form-horizontal">
+    <div class="cross-validation panel panel-success" [class.cross-validation-error]="registerForm.errors && (registerForm.touched || registerForm.dirty)">
+      <div class="panel-heading">
+        <h3>Registeration</h3>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label for="reg_netId" class="col-sm-3 col-md-3 col-lg-3 control-lable">netId</label>
+          <div class="col-sm-9 col-md-9 col-lg-9">
+            <input type="text" class="form-control" placeholder="netId" id="reg_netId" formControlName="netId" required>
+            <div *ngIf="reg_netId.invalid && (reg_netId.dirty || reg_netId.touched)"
+                 class="alert alert-danger">
+
+              <div *ngIf="reg_netId.errors.required">
+                Account is required.
+              </div>
+              <div *ngIf="reg_netId.errors.minlength">
+                Account must be at least 3 characters long.
+              </div>
+              <div *ngIf="registerForm.hasError('accountNameChecker', 'reg_netId')">
+                {{registerForm.getError('accountNameChecker', 'reg_netId')?.err}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br>
+        <div class="form-group">
+          <label for="displayName" class="col-sm-3 col-md-3 col-lg-3 control-lable">display name</label>
+          <div class="col-sm-9 col-md-9 col-lg-9">
+            <input type="text" class="form-control" placeholder="display_name" id="displayName" formControlName="display_name">
+            <div *ngIf="display_name.invalid && (display_name.dirty || display_name.touched)" class="alert alert-danger">
+              <div *ngIf="display_name.errors.required">
+                Display Name is required.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br>
+
+        <div class="form-group">
+          <label for="email" class="col-sm-3 col-md-3 col-lg-3 control-lable">email</label>
+          <div class="col-sm-9 col-md-9 col-lg-9">
+            <input type="email" class="form-control" placeholder="xxx@xxx.xxx" id="email" formControlName="email" required>
+            <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                 class="alert alert-danger">
+              <div *ngIf="email.errors.required">
+                Email is required.
+              </div>
+              <div *ngIf="email.errors.email">
+                Email is inValid.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br>
+        <div class="form-group">
+          <label for="phone" class="col-sm-3 col-md-3 col-lg-3 control-lable">phone</label>
+          <div class="col-sm-9 col-md-9 col-lg-9">
+            <input type="text" class="form-control" placeholder="123-123-1234" id="phone" formControlName="phone">
+            <div *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+                 class="alert alert-danger">
+              <div *ngIf="phone.errors.required">
+                Phone is required.
+              </div>
+              <div *ngIf="registerForm.hasError('phoneChecker', 'phone')">
+                {{registerForm.getError('phoneChecker', 'phone')?.err}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br>
+        <div class="form-group">
+          <label for="dob" class="col-sm-3 col-md-3 col-lg-3 control-lable">date of birth</label>
+          <div class="col-sm-9 col-md-9 col-lg-9">
+            <input type="date" class="form-control" id="dob" formControlName="dob">
+            <div *ngIf="dob.invalid && (dob.dirty || dob.touched)" class="alert alert-danger">
+              <div *ngIf="dob.errors.required">
+                Birthday is required;
+              </div>
+              <div *ngIf="registerForm.hasError('ageChecker', 'dob')">
+                {{registerForm.getError('ageChecker', 'dob')?.err}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br>
+        <div class="form-group">
+          <label for="zipcode" class="col-sm-3 col-md-3 col-lg-3 control-lable">zipcode</label>
+          <div class="col-sm-9 col-md-9 col-lg-9">
+            <input type="text" class="form-control" placeholder="77005" id="zipcode" formControlName="zipcode">
+            <div *ngIf="zipcode.invalid && (zipcode.dirty || zipcode.touched)"
+                 class="alert alert-danger">
+              <div *ngIf="zipcode.errors.required">
+                zipcode is required.
+              </div>
+              <div *ngIf="registerForm.hasError('zipcodeChecker', 'zipcode')">
+                {{registerForm.getError('zipcodeChecker', 'zipcode')?.err}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+
+        <div formGroupName="password">
+          <div class="form-group">
+            <label for="pass1" class="col-sm-3 col-md-3 col-lg-3 control-lable">password</label>
+            <div class="col-sm-9 col-md-9 col-lg-9">
+              <input type="password" class="form-control" placeholder="password" id="pass1" formControlName="pass1">
+              <div *ngIf="pass1.invalid && (pass1.dirty || pass1.touched)" class="alert alert-danger">
+                <div *ngIf="pass1.errors.minlength">
+                  Password must be at least 6 characters long.
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+
+          <div class="form-group">
+            <label for="pass2" class="col-sm-3 col-md-3 col-lg-3 control-lable">confirmation</label>
+            <div class="col-sm-9 col-md-9 col-lg-9">
+              <input type="password" class="form-control" id="pass2" formControlName="pass2">
+              <div *ngIf="registerForm.hasError('passValidator', 'password') && (pass2.dirty || pass2.touched)" class="alert alert-danger">
+                {{registerForm.getError('passValidator', 'password')?.err}}
+              </div>
+            </div>
+          </div>
+          <br>
+        </div>
+
+
+        <br>
+        <div class="form-group">
+            <div class="col-sm-5 col-md-5 col-lg-5"></div>
+            <div class="col-sm-3 col-md-3 col-lg-3">
+              <button type="submit" id="btnRegister" class="btn btn-success" [disabled]="registerForm.invalid" (click)="toMain()">sign up</button>
+            </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-1 col-md-1 col-lg-1"></div>
+          <div class="col-sm-9 col-md-9 col-lg-9">
+            <div class="alert alert-danger" *ngIf="(errMsg != '') && (errMsg != null)">{{errMsg}}</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-1 col-md-1 col-lg-1"></div>
+          <div id="successMsg" class="col-sm-9 col-md-9 col-lg-9">
+            <div class="alert alert-success" *ngIf="(successMsg != '') && (successMsg != null)">{{successMsg}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+</form>
